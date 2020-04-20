@@ -4,13 +4,13 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "gravatar_image_tag"
-  s.version = "1.2.0"
+  s.name = "ve_gravatar_image_tag"
+  s.version = "1.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Michael Deering"]
-  s.date = "2013-11-11"
-  s.email = "mdeering@mdeering.com"
+  s.authors = ["Michael Deering", "VersionEye"]
+  s.date = "2020-04-20"
+  s.email = "rubygems@versioneye.com"
   s.extra_rdoc_files = [
     "README.textile"
   ]
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
     "spec/gravatar_image_tag_spec.rb",
     "spec/test_helper.rb"
   ]
-  s.homepage = "http://github.com/mdeering/gravatar_image_tag"
+  s.homepage = "http://github.com/versioneye/gravatar_image_tag"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.24"
   s.summary = "A configurable and documented Rails view helper for adding gravatars into your Rails application."
