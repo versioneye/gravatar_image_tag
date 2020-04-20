@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
     "MIT-LICENSE",
     "README.textile",
     "Rakefile",
-    "lib/gravatar_image_tag.rb",
-    "spec/gravatar_image_tag_spec.rb",
+    "lib/ve_gravatar_image_tag.rb",
+    "spec/ve_gravatar_image_tag_spec.rb",
     "spec/test_helper.rb"
   ]
   s.homepage = "http://github.com/versioneye/gravatar_image_tag"
