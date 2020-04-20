@@ -1,4 +1,4 @@
-module GravatarImageTag
+module VeGravatarImageTag
 
   class << self
     attr_accessor :configuration
@@ -22,7 +22,7 @@ module GravatarImageTag
   end
 
   def self.included(base)
-    GravatarImageTag.configure { |c| nil }
+    VeGravatarImageTag.configure { |c| nil }
     base.extend ClassMethods
     base.send :include, InstanceMethods
   end
@@ -30,31 +30,31 @@ module GravatarImageTag
   module ClassMethods
     def default_gravatar_filetype=(value)
       warn "DEPRECATION WARNING: configuration of filetype= through this method is deprecated! Use the block configuration instead. http://github.com/mdeering/gravatar_image_tag"
-      GravatarImageTag.configure do |c|
+      VeGravatarImageTag.configure do |c|
         c.filetype = value
       end
     end
     def default_gravatar_image=(value)
       warn "DEPRECATION WARNING: configuration of default_gravatar_image= through this method is deprecated! Use the block configuration instead. http://github.com/mdeering/gravatar_image_tag"
-      GravatarImageTag.configure do |c|
+      VeGravatarImageTag.configure do |c|
         c.default_image = value
       end
     end
     def default_gravatar_rating=(value)
       warn "DEPRECATION WARNING: configuration of default_gravatar_rating= through this method is deprecated! Use the block configuration instead. http://github.com/mdeering/gravatar_image_tag"
-      GravatarImageTag.configure do |c|
+      VeGravatarImageTag.configure do |c|
         c.rating = value
       end
     end
     def default_gravatar_size=(value)
       warn "DEPRECATION WARNING: configuration of default_gravatar_size= through this method is deprecated! Use the block configuration instead. http://github.com/mdeering/gravatar_image_tag"
-      GravatarImageTag.configure do |c|
+      VeGravatarImageTag.configure do |c|
         c.size = value
       end
     end
     def secure_gravatar=(value)
       warn "DEPRECATION WARNING: configuration of secure_gravatar= through this method is deprecated! Use the block configuration instead. http://github.com/mdeering/gravatar_image_tag"
-      GravatarImageTag.configure do |c|
+      VeGravatarImageTag.configure do |c|
         c.secure = value
       end
     end
@@ -65,8 +65,8 @@ module GravatarImageTag
       gravatar_overrides = options.delete(:gravatar)
       options[:src] = gravatar_image_url(email, gravatar_overrides)
       options[:alt] ||= 'Gravatar'
-      if GravatarImageTag.configuration.include_size_attributes
-        size = GravatarImageTag::gravatar_options(gravatar_overrides)[:size] || 80
+      if VeGravatarImageTag.configuration.include_size_attributes
+        size = VeGravatarImageTag::gravatar_options(gravatar_overrides)[:size] || 80
         options[:height] = options[:width] = size.to_s
       end
 
@@ -77,7 +77,7 @@ module GravatarImageTag
 
     def gravatar_image_url(email, gravatar_overrides = {})
       email = email.strip.downcase if email.is_a? String
-      GravatarImageTag::gravatar_url(email, gravatar_overrides)
+      VeGravatarImageTag::gravatar_url(email, gravatar_overrides)
     end
   end
 
@@ -93,11 +93,11 @@ module GravatarImageTag
 
     def self.gravatar_options(overrides = {})
       {
-        :default  => GravatarImageTag.configuration.default_image,
-        :filetype => GravatarImageTag.configuration.filetype,
-        :rating   => GravatarImageTag.configuration.rating,
-        :secure   => GravatarImageTag.configuration.secure,
-        :size     => GravatarImageTag.configuration.size
+        :default  => VeGravatarImageTag.configuration.default_image,
+        :filetype => VeGravatarImageTag.configuration.filetype,
+        :rating   => VeGravatarImageTag.configuration.rating,
+        :secure   => VeGravatarImageTag.configuration.secure,
+        :size     => VeGravatarImageTag.configuration.size
       }.merge(overrides || {}).delete_if { |key, value| value.nil? }
     end
 
@@ -123,4 +123,4 @@ module GravatarImageTag
 
 end
 
-ActionView::Base.send(:include, GravatarImageTag) if defined?(ActionView::Base)
+ActionView::Base.send(:include, VeGravatarImageTag) if defined?(ActionView::Base)

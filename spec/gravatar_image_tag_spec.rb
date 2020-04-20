@@ -1,10 +1,10 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-require 'gravatar_image_tag'
+require 've_gravatar_image_tag'
 
-ActionView::Base.send(:include, GravatarImageTag)
+ActionView::Base.send(:include, VeGravatarImageTag)
 
-describe GravatarImageTag do
+describe VeGravatarImageTag do
 
   email                 = 'mdeering@mdeering.com'
   md5                   = '4da9ad2bd4a2d1ce3c428e32c423588a'
@@ -46,11 +46,11 @@ describe GravatarImageTag do
       it "should give a deprication warning for assigning to #{singleton_variable} and passthrough to set the new variable" do
         expect(ActionView::Base).to receive(:warn)
         ActionView::Base.send("#{singleton_variable}=", value)
-        GravatarImageTag.configuration.default_image == value if singleton_variable == :default_gravatar_image
-        GravatarImageTag.configuration.filetype      == value if singleton_variable == :default_gravatar_filetype
-        GravatarImageTag.configuration.rating        == value if singleton_variable == :default_gravatar_rating
-        GravatarImageTag.configuration.size          == value if singleton_variable == :default_gravatar_size
-        GravatarImageTag.configuration.secure        == value if singleton_variable == :secure_gravatar
+        VeGravatarImageTag.configuration.default_image == value if singleton_variable == :default_gravatar_image
+        VeGravatarImageTag.configuration.filetype      == value if singleton_variable == :default_gravatar_filetype
+        VeGravatarImageTag.configuration.rating        == value if singleton_variable == :default_gravatar_rating
+        VeGravatarImageTag.configuration.size          == value if singleton_variable == :default_gravatar_size
+        VeGravatarImageTag.configuration.secure        == value if singleton_variable == :secure_gravatar
       end
     end
 
@@ -78,31 +78,31 @@ describe GravatarImageTag do
     end
 
     it 'should set the image tags height and width to avoid the page going all jiggy (technical term) when loading a page with lots of Gravatars' do
-      GravatarImageTag.configure { |c| c.size = 30 }
+      VeGravatarImageTag.configure { |c| c.size = 30 }
       expect(!!view.gravatar_image_tag(email).match(/height="30"/)).to be_truthy
       expect(!!view.gravatar_image_tag(email).match(/width="30"/)).to  be_truthy
     end
 
     it 'should set the image tags height and width attributes to 80px (gravatars default) if no size is given.' do
-      GravatarImageTag.configure { |c| c.size = nil }
+      VeGravatarImageTag.configure { |c| c.size = nil }
       expect(!!view.gravatar_image_tag(email).match(/height="80"/)).to be_truthy
       expect(!!view.gravatar_image_tag(email).match(/width="80"/)).to  be_truthy
     end
 
     it 'should set the image tags height and width attributes from the overrides on the size' do
-      GravatarImageTag.configure { |c| c.size = 120 }
+      VeGravatarImageTag.configure { |c| c.size = 120 }
       expect(!!view.gravatar_image_tag(email, gravatar: { size: 45 }).match(/height="45"/)).to be_truthy
       expect(!!view.gravatar_image_tag(email, gravatar: { size: 75 }).match(/width="75"/)).to  be_truthy
     end
 
     it 'should not include the height and width attributes on the image tag if it is turned off in the configuration' do
-      GravatarImageTag.configure { |c| c.include_size_attributes = false }
+      VeGravatarImageTag.configure { |c| c.include_size_attributes = false }
       expect(!!view.gravatar_image_tag(email).match(/height=/)).to be_falsey
       expect(!!view.gravatar_image_tag(email).match(/width=/)).to  be_falsey
     end
 
-    it 'GravatarImageTag#gravitar_id should not error out when email is nil' do
-      expect { GravatarImageTag::gravatar_id(nil) }.to_not raise_error
+    it 'VeGravatarImageTag#gravitar_id should not error out when email is nil' do
+      expect { VeGravatarImageTag::gravatar_id(nil) }.to_not raise_error
     end
 
     it 'should normalize the email to Gravatar standards (http://en.gravatar.com/site/implement/hash/)' do
