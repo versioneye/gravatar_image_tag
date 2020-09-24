@@ -118,7 +118,8 @@ module VeGravatarImageTag
 
     def self.value_cleaner(value)
       value = value.to_s
-      URI.escape(value, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+      URI.encode_www_form_component( value )
+      # URI.escape(value, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     end
 
 end
